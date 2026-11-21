@@ -1,0 +1,857 @@
+/* ============================================================
+   PETUALANGAN KEBUN ANGKA — style.css
+   Palet: biru langit #2563EB | amber #F59E0B | hijau #16A34A
+          latar lembut #F8FAFC
+   ============================================================ */
+
+/* ----- RESET & DASAR ----- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', 'Comic Sans MS', system-ui, sans-serif;
+  background: linear-gradient(160deg, #EFF6FF 0%, #FEF9EE 100%);
+  min-height: 100vh;
+  color: #1E293B;
+  line-height: 1.5;
+}
+
+/* ----- HEADER ----- */
+.app-header {
+  background: #2563EB;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  gap: 1rem;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+.header-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.app-header h1 {
+  font-size: clamp(0.9rem, 3vw, 1.2rem);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   MENU NAVIGASI DESKTOP
+   ============================================================ */
+.nav-menu {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+/* Tombol item menu desktop */
+.nav-link {
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, color 0.18s, transform 0.15s;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid #FEF3C7;
+  outline-offset: 2px;
+}
+
+/* State aktif: tab yang sedang ditampilkan */
+.nav-link.active {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+}
+
+/* ----- Header controls (mute + hamburger) ----- */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* Tombol mute */
+.btn-mute {
+  background: rgba(255,255,255,0.18);
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-mute:hover { background: rgba(255,255,255,0.3); transform: scale(1.08); }
+
+/* Tombol hamburger (hanya tampil di mobile) */
+.btn-hamburger {
+  display: none;         /* disembunyikan di desktop */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.18);
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  transition: background 0.2s;
+  padding: 0;
+}
+
+.btn-hamburger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+/* Animasi hamburger → X saat terbuka */
+.btn-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.btn-hamburger.open span:nth-child(2) { opacity: 0; }
+.btn-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.btn-hamburger:hover { background: rgba(255,255,255,0.28); }
+
+/* ============================================================
+   MENU MOBILE DROPDOWN
+   ============================================================ */
+.nav-mobile {
+  background: #1D4ED8;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1);
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.nav-mobile.open {
+  max-height: 260px;
+}
+
+.nav-mobile-list {
+  list-style: none;
+  padding: 0.5rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.nav-mobile-link {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-mobile-link:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.nav-mobile-link.active {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+
+/* ----- MANAJEMEN LAYAR (screens) ----- */
+.screen {
+  display: none;
+  min-height: calc(100vh - 64px);
+  padding: 2rem 1rem 3rem;
+}
+
+.screen.active {
+  display: block;
+}
+
+/* ----- LAYAR PILIH LEVEL ----- */
+.level-container {
+  max-width: 580px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.level-heading {
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
+  font-weight: 900;
+  color: #1E40AF;
+  margin-bottom: 0.4rem;
+}
+
+.level-subtitle {
+  font-size: 1.05rem;
+  color: #475569;
+  margin-bottom: 2.5rem;
+}
+
+.level-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+/* Kartu level */
+.level-card {
+  background: #fff;
+  border: 3px solid #E2E8F0;
+  border-radius: 20px;
+  padding: 2rem 1.25rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+}
+
+.level-card:hover, .level-card:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.2);
+  border-color: #2563EB;
+  outline: none;
+}
+
+.level-emoji {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.level-card h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #1E293B;
+}
+
+.level-card p {
+  font-size: 0.9rem;
+  color: #64748B;
+}
+
+.level-badge {
+  margin-top: 0.4rem;
+  background: #EFF6FF;
+  color: #1D4ED8;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 0.25rem 0.9rem;
+  border: 1.5px solid #BFDBFE;
+}
+
+/* ============================================================
+   LAYAR CARA BERMAIN
+   ============================================================ */
+.help-container {
+  max-width: 580px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.help-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  text-align: left;
+}
+
+.help-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.1rem 1.25rem;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+  border: 2px solid #E2E8F0;
+}
+
+.help-step-num {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #2563EB;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.help-step-body h4 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #1E293B;
+  margin-bottom: 0.2rem;
+}
+
+.help-step-body p {
+  font-size: 0.9rem;
+  color: #475569;
+  line-height: 1.55;
+}
+
+/* ----- LAYAR PERMAINAN ----- */
+.game-container {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+/* Topbar skor + counter + tombol ganti level */
+.game-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.game-topbar-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.score-display {
+  background: #2563EB;
+  color: #fff;
+  border-radius: 12px;
+  padding: 0.4rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 68px;
+}
+
+.score-label { font-size: 0.7rem; font-weight: 700; opacity: 0.85; letter-spacing: 0.05em; text-transform: uppercase; }
+.score-value { font-size: 1.5rem; font-weight: 900; line-height: 1; }
+
+.question-counter {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #475569;
+}
+
+/* Badge level di dalam layar game */
+.level-indicator {
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: #EFF6FF;
+  color: #1D4ED8;
+  border-radius: 999px;
+  padding: 0.15rem 0.65rem;
+  border: 1.5px solid #BFDBFE;
+}
+
+.btn-change-level {
+  background: #FEF3C7;
+  border: 2px solid #F59E0B;
+  color: #92400E;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.btn-change-level:hover { background: #FDE68A; transform: scale(1.04); }
+
+/* Progress bar */
+.progress-bar-wrapper { display: flex; flex-direction: column; gap: 0.45rem; }
+
+.progress-bar-track {
+  width: 100%;
+  height: 10px;
+  background: #E2E8F0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2563EB, #60A5FA);
+  border-radius: 999px;
+  width: 0%;
+  transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* Titik progress */
+.progress-dots {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.progress-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #E2E8F0;
+  border: 2px solid #CBD5E1;
+  transition: background 0.3s, border-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+}
+
+.progress-dot.correct  { background: #16A34A; border-color: #15803D; }
+.progress-dot.wrong    { background: #EF4444; border-color: #DC2626; }
+.progress-dot.current  { background: #F59E0B; border-color: #D97706; animation: pulseDot 1s ease-in-out infinite; }
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.3); }
+}
+
+/* Area visual ilustrasi */
+.visual-area {
+  min-height: 72px;
+  background: #fff;
+  border-radius: 16px;
+  border: 2px dashed #BFDBFE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0.75rem 1rem;
+  font-size: 1.9rem;
+  letter-spacing: 2px;
+  overflow: hidden;
+}
+
+/* Kartu pertanyaan utama */
+.question-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 6px 24px rgba(37, 99, 235, 0.12);
+  padding: 1.5rem 1rem;
+  text-align: center;
+}
+
+.question-text {
+  font-size: clamp(2rem, 7vw, 3.2rem);
+  font-weight: 900;
+  color: #1E293B;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+}
+
+/* Banner umpan balik */
+.feedback-banner {
+  min-height: 52px;
+  border-radius: 14px;
+  padding: 0.75rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.25s, transform 0.25s;
+  pointer-events: none;
+}
+
+.feedback-banner.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.feedback-banner.benar {
+  background: #DCFCE7;
+  color: #15803D;
+  border: 2px solid #86EFAC;
+}
+
+.feedback-banner.salah {
+  background: #FEF2F2;
+  color: #B91C1C;
+  border: 2px solid #FECACA;
+}
+
+/* Grid 4 tombol jawaban */
+.answer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+
+.answer-btn {
+  min-height: 64px;
+  font-size: clamp(1.3rem, 4vw, 1.75rem);
+  font-weight: 800;
+  background: #fff;
+  color: #1E293B;
+  border: 3px solid #E2E8F0;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s, border-color 0.15s;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+  position: relative;
+  overflow: hidden;
+}
+
+.answer-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.18);
+  border-color: #2563EB;
+}
+
+.answer-btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+/* State benar */
+.answer-btn.benar {
+  background: #DCFCE7;
+  border-color: #16A34A;
+  color: #15803D;
+}
+
+/* State salah */
+.answer-btn.salah {
+  background: #FEF2F2;
+  border-color: #EF4444;
+  color: #B91C1C;
+}
+
+/* State soal sudah dijawab: tombol lain di-disabled */
+.answer-btn:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.answer-btn.benar:disabled,
+.answer-btn.salah:disabled {
+  opacity: 1;
+}
+
+/* Tombol Soal Berikutnya */
+.next-btn-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-next {
+  min-height: 52px;
+  padding: 0 2rem;
+  font-size: 1.1rem;
+  font-weight: 800;
+  background: #2563EB;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.btn-next:hover { background: #1D4ED8; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4); }
+.btn-next.hidden { display: none; }
+
+/* ----- LAYAR HASIL ----- */
+.result-container {
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.result-title {
+  font-size: clamp(1.8rem, 6vw, 2.4rem);
+  font-weight: 900;
+  color: #1E40AF;
+}
+
+/* Bintang 1-3 */
+.stars-display {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+}
+
+.star-icon {
+  font-size: 3.2rem;
+  line-height: 1;
+  opacity: 0.2;
+  transform: scale(0.8);
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+.star-icon.active {
+  opacity: 1;
+  transform: scale(1.1);
+  animation: starPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes starPop {
+  0%   { transform: scale(0.3); opacity: 0; }
+  60%  { transform: scale(1.3); }
+  100% { transform: scale(1.1); opacity: 1; }
+}
+
+/* Kartu statistik akhir */
+.result-score-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+  padding: 1.5rem 2rem;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.result-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.result-stat-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748B;
+}
+
+.result-stat-value {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #1E293B;
+}
+
+.result-stat-value.correct { color: #16A34A; }
+.result-stat-value.wrong   { color: #EF4444; }
+
+.result-message {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #334155;
+  background: #F1F5F9;
+  border-radius: 14px;
+  padding: 0.9rem 1.4rem;
+  line-height: 1.6;
+}
+
+/* Tombol aksi hasil */
+.result-actions {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-primary {
+  min-height: 52px;
+  padding: 0 1.75rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  background: #2563EB;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+  transition: transform 0.15s, background 0.15s;
+}
+
+.btn-primary:hover { background: #1D4ED8; transform: translateY(-2px); }
+
+.btn-secondary {
+  min-height: 52px;
+  padding: 0 1.75rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  background: #fff;
+  color: #2563EB;
+  border: 3px solid #2563EB;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.15s;
+}
+
+.btn-secondary:hover { background: #EFF6FF; transform: translateY(-2px); }
+
+/* ----- ANIMASI MASUK LAYAR ----- */
+.screen.active > * {
+  animation: fadeSlideIn 0.35s ease-out both;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ----- ANIMASI GOYANG SALAH ----- */
+@keyframes shakeWrong {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-8px); }
+  40%       { transform: translateX(8px); }
+  60%       { transform: translateX(-6px); }
+  80%       { transform: translateX(6px); }
+}
+
+.shake {
+  animation: shakeWrong 0.4s ease-in-out;
+}
+
+/* ----- ANIMASI EMOJI TERBANG ----- */
+.emoji-fly {
+  position: fixed;
+  font-size: 2.4rem;
+  pointer-events: none;
+  animation: flyUp 1s ease-out forwards;
+  z-index: 999;
+  user-select: none;
+}
+
+@keyframes flyUp {
+  0%   { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-140px) scale(1.6); }
+}
+
+/* ============================================================
+   RESPONSIF — MOBILE (≤ 640px)
+   ============================================================ */
+@media (max-width: 640px) {
+  /* Sembunyikan menu desktop, tampilkan hamburger */
+  .nav-menu {
+    display: none;
+  }
+
+  .btn-hamburger {
+    display: flex;
+  }
+
+  /* Layout level cards jadi 1 kolom di layar sempit */
+  .level-cards {
+    grid-template-columns: 1fr;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .answer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+  }
+
+  .answer-btn {
+    min-height: 58px;
+    font-size: 1.4rem;
+  }
+
+  .result-score-card {
+    gap: 1.25rem;
+  }
+
+  /* Header title lebih kecil di mobile */
+  .app-header h1 {
+    font-size: 0.85rem;
+  }
+}
+
+/* ============================================================
+   RESPONSIF — TABLET KE ATAS (≥ 768px)
+   ============================================================ */
+@media (min-width: 768px) {
+  .game-container,
+  .level-container,
+  .result-container,
+  .help-container {
+    padding-top: 0.5rem;
+  }
+
+  /* Pastikan hamburger tidak muncul di tablet ke atas */
+  .btn-hamburger {
+    display: none !important;
+  }
+
+  .nav-menu {
+    display: flex;
+  }
+}

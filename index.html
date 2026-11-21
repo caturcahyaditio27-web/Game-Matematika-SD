@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🌻 Petualangan Kebun Angka</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER UTAMA ===== -->
+  <header class="app-header">
+    <div class="header-inner">
+
+      <!-- Logo & Judul -->
+      <div class="header-title">
+        <span class="header-icon">🌻</span>
+        <h1>Petualangan Kebun Angka</h1>
+      </div>
+
+      <!-- ===== MENU NAVIGASI ===== -->
+      <nav class="nav-menu" id="navMenu" aria-label="Menu utama">
+        <ul class="nav-list">
+          <li>
+            <button class="nav-link active" id="navBeranda" data-target="screenLevel">
+              🏠 Beranda
+            </button>
+          </li>
+          <li>
+            <button class="nav-link" id="navCaraBermain" data-target="screenHelp">
+              📖 Cara Bermain
+            </button>
+          </li>
+          <li>
+            <button class="nav-link" id="navPilihLevel" data-target="screenLevel">
+              🎯 Pilih Level
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Tombol hamburger (mobile) + mute -->
+      <div class="header-controls">
+        <button class="btn-mute" id="btnMute" title="Matikan / Nyalakan suara">🔊</button>
+        <button class="btn-hamburger" id="btnHamburger" aria-label="Buka menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Menu mobile (dropdown) -->
+    <nav class="nav-mobile" id="navMobile" aria-hidden="true">
+      <ul class="nav-mobile-list">
+        <li><button class="nav-mobile-link" data-target="screenLevel">🏠 Beranda</button></li>
+        <li><button class="nav-mobile-link" data-target="screenHelp">📖 Cara Bermain</button></li>
+        <li><button class="nav-mobile-link" data-target="screenLevel">🎯 Pilih Level</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== LAYAR PEMILIHAN LEVEL ===== -->
+  <main id="screenLevel" class="screen active">
+    <div class="level-container">
+      <h2 class="level-heading">Pilih Levelmu! 🎯</h2>
+      <p class="level-subtitle">Halo, Penjelajah Muda! Mau ke kebun mana hari ini?</p>
+
+      <div class="level-cards">
+        <!-- Kartu Level Kelas 1 -->
+        <button class="level-card" id="btnLevel1" data-level="1">
+          <span class="level-emoji">🍎</span>
+          <h3>Kelas 1</h3>
+          <p>Penjumlahan</p>
+          <span class="level-badge">Angka ≤ 20</span>
+        </button>
+
+        <!-- Kartu Level Kelas 2 -->
+        <button class="level-card" id="btnLevel2" data-level="2">
+          <span class="level-emoji">🍊</span>
+          <h3>Kelas 2</h3>
+          <p>Penjumlahan &amp; Pengurangan</p>
+          <span class="level-badge">Angka ≤ 50</span>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== LAYAR CARA BERMAIN ===== -->
+  <main id="screenHelp" class="screen">
+    <div class="help-container">
+      <h2 class="level-heading">📖 Cara Bermain</h2>
+      <p class="level-subtitle">Ikuti langkah-langkah seru ini!</p>
+
+      <div class="help-steps">
+        <div class="help-step">
+          <span class="help-step-num">1</span>
+          <div class="help-step-body">
+            <h4>Pilih Level</h4>
+            <p>Kelas 1 untuk penjumlahan angka sampai 20. Kelas 2 untuk penjumlahan dan pengurangan angka sampai 50.</p>
+          </div>
+        </div>
+        <div class="help-step">
+          <span class="help-step-num">2</span>
+          <div class="help-step-body">
+            <h4>Hitung Soal</h4>
+            <p>Lihat ilustrasi buah dan angka pada papan soal, lalu hitung jawabannya dengan teliti.</p>
+          </div>
+        </div>
+        <div class="help-step">
+          <span class="help-step-num">3</span>
+          <div class="help-step-body">
+            <h4>Pilih Jawaban</h4>
+            <p>Tekan satu dari 4 kartu jawaban. Jawaban benar akan berwarna hijau, salah berwarna merah.</p>
+          </div>
+        </div>
+        <div class="help-step">
+          <span class="help-step-num">4</span>
+          <div class="help-step-body">
+            <h4>Kumpulkan Bintang</h4>
+            <p>Selesaikan 10 soal untuk mendapat 1–3 bintang. Semakin banyak benar, semakin banyak bintang! ⭐⭐⭐</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-primary" id="btnStartFromHelp" style="margin-top:1rem;">
+        🚀 Mulai Bermain
+      </button>
+    </div>
+  </main>
+
+  <!-- ===== LAYAR PERMAINAN ===== -->
+  <main id="screenGame" class="screen">
+    <div class="game-container">
+
+      <!-- Info baris atas: skor, counter, label level, tombol ganti level -->
+      <div class="game-topbar">
+        <div class="score-display">
+          <span class="score-label">Skor</span>
+          <span class="score-value" id="scoreValue">0</span>
+        </div>
+        <div class="game-topbar-center">
+          <div class="question-counter" id="questionCounter">Soal 1 / 10</div>
+          <span class="level-indicator" id="levelIndicator">Kelas 1</span>
+        </div>
+        <button class="btn-change-level" id="btnChangeLevel">Ganti Level</button>
+      </div>
+
+      <!-- Progress bar 10 soal -->
+      <div class="progress-bar-wrapper" aria-label="Progress soal">
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-dots" id="progressDots"></div>
+      </div>
+
+      <!-- Area ilustrasi buah/bintang visual -->
+      <div class="visual-area" id="visualArea" aria-label="Ilustrasi soal"></div>
+
+      <!-- Papan pertanyaan besar -->
+      <div class="question-card">
+        <p class="question-text" id="questionText">? + ? = ?</p>
+      </div>
+
+      <!-- Pesan umpan balik -->
+      <div class="feedback-banner" id="feedbackBanner" role="alert" aria-live="polite"></div>
+
+      <!-- 4 Tombol pilihan jawaban -->
+      <div class="answer-grid" id="answerGrid">
+        <button class="answer-btn" data-index="0"></button>
+        <button class="answer-btn" data-index="1"></button>
+        <button class="answer-btn" data-index="2"></button>
+        <button class="answer-btn" data-index="3"></button>
+      </div>
+
+      <!-- Tombol Soal Berikutnya (muncul setelah menjawab) -->
+      <div class="next-btn-wrapper">
+        <button class="btn-next hidden" id="btnNext">Soal Berikutnya ➡️</button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===== LAYAR HASIL AKHIR ===== -->
+  <main id="screenResult" class="screen">
+    <div class="result-container">
+      <h2 class="result-title" id="resultTitle">Ronde Selesai! 🎉</h2>
+
+      <!-- Bintang 1–3 -->
+      <div class="stars-display" id="starsDisplay" aria-label="Bintang perolehan"></div>
+
+      <!-- Panel skor akhir -->
+      <div class="result-score-card">
+        <div class="result-stat">
+          <span class="result-stat-label">Skor Akhir</span>
+          <span class="result-stat-value" id="finalScore">0</span>
+        </div>
+        <div class="result-stat">
+          <span class="result-stat-label">Jawaban Benar</span>
+          <span class="result-stat-value correct" id="finalCorrect">0</span>
+        </div>
+        <div class="result-stat">
+          <span class="result-stat-label">Jawaban Salah</span>
+          <span class="result-stat-value wrong" id="finalWrong">0</span>
+        </div>
+      </div>
+
+      <!-- Pesan penyemangat berdasarkan skor -->
+      <p class="result-message" id="resultMessage"></p>
+
+      <!-- Tombol aksi akhir -->
+      <div class="result-actions">
+        <button class="btn-primary" id="btnPlayAgain">🔄 Main Lagi</button>
+        <button class="btn-secondary" id="btnBackToLevel">🏠 Pilih Level</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
